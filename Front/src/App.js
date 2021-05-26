@@ -4,6 +4,30 @@ import Form from './components/Form'
 import TodoList from './components/TodoList'
 import './App.css';
 
+class App1 extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {apiResponse:""};
+  }
+
+  callApi(){
+    fetch("http://localhost:9000/testApi")
+    .then(res => res.text())
+    .then(res => this.setState({apiResponse:res}));
+  }
+
+  componentWillMount(){
+    this.callApi();
+  }
+  render(){
+    return(
+      <div id="api">
+        {this.state.apiResponse}
+      </div>
+    )
+  }
+}
+
 const App = () => {
 
   const initialState = JSON.parse(localStorage.getItem("todos")) || [];
@@ -17,9 +41,13 @@ const App = () => {
 
   return <div className="container1 container-fluid">
     <div className="app-wrapper">
+
      <div>
         <Header/>
      </div>
+    <div>
+      <App1/>
+    </div>
      <div id="formdata">
        <TodoList
         todos={todos}
@@ -27,8 +55,10 @@ const App = () => {
         setEditTodo={setEditTodo}
        />
      </div>
+
      <hr></hr>
      <div>
+       
         <Form
           input={input}
           setInput={setInput}

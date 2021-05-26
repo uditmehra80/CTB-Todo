@@ -11,7 +11,7 @@ const Form  = ({ input,setInput,todos,setTodos ,editTodo, setEditTodo }) => {
         setEditTodo("");
     };
     const onInputChange = (event) => {
-        setInput(event.target.value);
+        setInput(event.target.value)
     };
 
     useEffect(() => {
@@ -33,8 +33,7 @@ const Form  = ({ input,setInput,todos,setTodos ,editTodo, setEditTodo }) => {
             updateTodo(input, editTodo.id,editTodo.completed)
         }
     };
-
-    return(
+    return(<>
        <form onSubmit={onFormSubmit}>
            <input 
             type="text"
@@ -43,12 +42,14 @@ const Form  = ({ input,setInput,todos,setTodos ,editTodo, setEditTodo }) => {
             value={input}
             required
             onChange={onInputChange}
+            minLength="3"
             >
             </input>
            <button className="button-add" type="submit">
                {editTodo ? "OK":"Add"}
            </button>
        </form>
+       </>
     )
 }
 
